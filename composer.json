@@ -16,8 +16,6 @@
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^9.6"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "PieceOfCake2\\SecurityCheck\\": "src/"
