@@ -1,0 +1,9 @@
+parameters:
+    level: 5
+    phpVersion: 80000
+    paths:
+        - src
+        - bin/security-check
+        - tests/TestCase
+    bootstrapFiles:
+        - tests/bootstrap.php

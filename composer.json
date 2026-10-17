@@ -1,0 +1,40 @@
+{
+    "name": "pieceofcake2/security-check",
+    "description": "The security checks of a CakePHP 2 application in one command: the Composer packages (SCA), the code (SAST) and the running application (DAST), each as a PDF report",
+    "type": "library",
+    "keywords": ["security", "sca", "sast", "dast", "owasp", "zap", "semgrep", "phpstan", "cakephp", "cakephp2", "report", "pdf"],
+    "license": "MIT",
+    "homepage": "https://pieceofcake2.github.io/security-check/",
+    "require": {
+        "php": ">=8.0",
+        "pieceofcake2/security-dast": "^1.0",
+        "pieceofcake2/security-sast": "^1.0",
+        "pieceofcake2/security-sca": "^1.0"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "^5.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^9.6"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "PieceOfCake2\\SecurityCheck\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PieceOfCake2\\SecurityCheck\\Test\\": "tests/TestCase/"
+        }
+    },
+    "bin": [
+        "bin/security-check"
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
