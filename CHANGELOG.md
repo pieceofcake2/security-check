@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.0.0
 
 - First release: `vendor/bin/security-check` runs the security checks of pieceofcake2 one after another,
   `security-sca`, `security-sast` and `security-dast`, each with its PDF report and its settings of
