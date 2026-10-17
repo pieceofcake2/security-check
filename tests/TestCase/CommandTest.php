@@ -90,6 +90,13 @@ class CommandTest extends TestCase
         Command::options(['--only=sca,iast']);
     }
 
+    public function testEmptyOnly(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('--only must name at least one of sca, sast, dast.');
+        Command::options(['--only=,']);
+    }
+
     public function testUnknownOption(): void
     {
         $output = '';

@@ -22,7 +22,7 @@ much more than each of them.
 composer require --dev pieceofcake2/security-check
 ```
 
-It installs the three packages. Their requirements apply: PHP 8.0+, Composer 2.4+, Docker (for ZAP, and for
+It installs the three packages. Their requirements apply: PHP 8.0+, Composer 2.8+, Docker (for ZAP, and for
 Semgrep when SAST uses it), Google Chrome or Chromium 131+ to print the PDFs, and on Linux `fonts-noto-cjk` for
 Japanese reports.
 
@@ -88,6 +88,10 @@ return [
     ],
 ];
 ```
+
+The file is read by each check in turn, so it must only return the array: a function or a class declared in it
+would be declared again by the second check, which fails. A value that is `null` is not set, e.g. the password
+when `SECURITY_DAST_PASSWORD` is not set.
 
 The keys are the options of each command in camel case (`--fail-on` is `failOn`). See the settings of each check:
 [SCA](https://pieceofcake2.github.io/security-sca/#the-settings-file),
