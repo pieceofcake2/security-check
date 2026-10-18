@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Unreleased
+
+- The example workflow of the docs is in the Composer package, which `docs/ci.md` links to
+
 ## 1.0.1
 
 - An empty `--only` is an error, instead of running no check and passing
