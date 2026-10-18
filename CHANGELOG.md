@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.0.1
 
 - An empty `--only` is an error, instead of running no check and passing
 - Needs Composer 2.8+, as pieceofcake2/security-sca does
