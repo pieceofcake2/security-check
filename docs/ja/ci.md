@@ -1,7 +1,7 @@
 # GitHub Actions での CI
 
-[docs/examples/security-check.yml](../examples/security-check.yml) は、push と pull request のたびと毎週、DAST に必要な
-テストのデータベースとともに 3 つの診断を実行し、3 つの報告書を 1 つの成果物としてアップロードします。
+[docs/examples/security-check.yml](../examples/security-check.yml) は、`main` への push と pull request のたびと毎週、
+DAST に必要なテストのデータベースとともに 3 つの診断を実行し、3 つの報告書を 1 つの成果物としてアップロードします。
 
 ```yaml
 - run: composer install --no-interaction --no-progress
@@ -11,11 +11,17 @@
   if: ${{ !cancelled() }}
   with:
     name: security-reports
-    path: tmp/security/*.pdf
+    path: |
+      tmp/security/*.pdf
+      tmp/security-*.pdf
+    if-no-files-found: error
 ```
 
 - 診断の設定は `config/security.php` から読みます ([設定ファイル](README.md#設定ファイル))。たとえば、報告書の
-  ディレクトリは `'report' => ['dir' => 'tmp/security']` です。
+  ディレクトリは `'report' => ['dir' => 'tmp/security']` です。指定しないと、報告書は `tmp/security-sca.pdf`、
+  `tmp/security-sast.pdf`、`tmp/security-dast.pdf` です。`path` はどちらも含みます。
+- `if-no-files-found: error` で、報告書が 1 つもないときにアップロードを失敗させます。`path` が設定の
+  ディレクトリと合っていないときなどです。
 - 毎週の実行 (`schedule`) は SCA のためです。変えていないパッケージにも、新しいアドバイザリが公開されます。
 - DAST はアプリケーションを `APP_ENV=test` で動かすので、ジョブには、テストと同じく、テーブルのあるテストの
   データベースが要ります ([security-dast の CI](https://pieceofcake2.github.io/security-dast/ja/ci))。

@@ -125,6 +125,9 @@ final class Command
 
         $names = $options['only'] === null ? self::CHECKS : array_values(array_filter(array_map(static fn(string $name): string => strtolower(trim($name)), explode(',', $options['only'])), static fn(string $name): bool => $name !== ''));
         $unknown = array_diff($names, self::CHECKS);
+        if ($names === []) {
+            throw new InvalidArgumentException(sprintf('--only must name at least one of %s.', implode(', ', self::CHECKS)));
+        }
         if ($unknown !== []) {
             throw new InvalidArgumentException(sprintf('--only must be a list of %s: %s', implode(', ', self::CHECKS), implode(', ', $unknown)));
         }

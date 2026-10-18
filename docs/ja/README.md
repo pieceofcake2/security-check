@@ -22,7 +22,7 @@ pieceofcake2 の 3 つの診断を順に実行し、それぞれが A4 の PDF �
 composer require --dev pieceofcake2/security-check
 ```
 
-3 つのパッケージがインストールされます。それぞれの必要なものが必要です。PHP 8.0 以上、Composer 2.4 以上、Docker
+3 つのパッケージがインストールされます。それぞれの必要なものが必要です。PHP 8.0 以上、Composer 2.8 以上、Docker
 (ZAP と、SAST で使うなら Semgrep のため)、PDF の印刷に Google Chrome か Chromium 131 以上、日本語の報告書には Linux
 では `fonts-noto-cjk` です。
 
@@ -87,6 +87,10 @@ return [
     ],
 ];
 ```
+
+ファイルはそれぞれの診断が順に読むので、配列を返すだけにしてください。中で宣言した関数やクラスは、2 つ目の診断が
+もう一度宣言して失敗します。`null` の値は設定されていないものとして扱います。`SECURITY_DAST_PASSWORD` が
+設定されていないときのパスワードなどです。
 
 キーは、それぞれのコマンドのオプションをキャメルケースにしたものです (`--fail-on` は `failOn`)。それぞれの設定は
 [SCA](https://pieceofcake2.github.io/security-sca/ja/#設定ファイル)、

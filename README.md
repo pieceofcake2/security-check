@@ -25,7 +25,7 @@ vendor/bin/security-check
 
 ## Requirements
 
-* PHP 8.0+ and Composer 2.4+
+* PHP 8.0+ and Composer 2.8+
 * Docker (for ZAP, and for Semgrep when SAST uses it)
 * Google Chrome or Chromium 131+
 

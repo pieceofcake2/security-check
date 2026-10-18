@@ -50,7 +50,7 @@ jobs:
       - run: sudo apt-get install -y fonts-noto-cjk
 
       # The settings come from config/security.php: 'report' => ['dir' => 'tmp/security'] writes the reports to
-      # tmp/security/
+      # tmp/security/, and without it they are tmp/security-sca.pdf, tmp/security-sast.pdf and tmp/security-dast.pdf
       - name: Run the security checks
         run: vendor/bin/security-check
 
@@ -59,5 +59,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: security-reports
-          path: tmp/security/*.pdf
+          path: |
+            tmp/security/*.pdf
+            tmp/security-*.pdf
+          if-no-files-found: error
           retention-days: 30

@@ -1,7 +1,7 @@
 # CI with GitHub Actions
 
-[docs/examples/security-check.yml](examples/security-check.yml) runs the three checks on each push and pull
-request, and every week, with the test database that DAST needs, and uploads the three reports in one artifact:
+[docs/examples/security-check.yml](examples/security-check.yml) runs the three checks on each push to `main`
+and each pull request, and every week, with the test database that DAST needs, and uploads the three reports in one artifact:
 
 ```yaml
 - run: composer install --no-interaction --no-progress
@@ -11,11 +11,17 @@ request, and every week, with the test database that DAST needs, and uploads the
   if: ${{ !cancelled() }}
   with:
     name: security-reports
-    path: tmp/security/*.pdf
+    path: |
+      tmp/security/*.pdf
+      tmp/security-*.pdf
+    if-no-files-found: error
 ```
 
 - The settings of the checks come from `config/security.php` ([The Settings File](README.md#the-settings-file)),
-  e.g. `'report' => ['dir' => 'tmp/security']` for the directory of the reports.
+  e.g. `'report' => ['dir' => 'tmp/security']` for the directory of the reports. Without it, the reports are
+  `tmp/security-sca.pdf`, `tmp/security-sast.pdf` and `tmp/security-dast.pdf`: the `path` takes both.
+- `if-no-files-found: error` fails the upload when no report was written, e.g. when the `path` does not match
+  the directory of the settings.
 - The weekly run (`schedule`) matters for SCA: new advisories are published for packages that did not change.
 - DAST runs the application with `APP_ENV=test`: the job needs the test database with its tables, as for the
   tests (see [CI of security-dast](https://pieceofcake2.github.io/security-dast/ci)).
