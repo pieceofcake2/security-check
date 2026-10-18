@@ -23,6 +23,9 @@ DAST に必要なテストのデータベースとともに 3 つの診断を実
 - `if-no-files-found: error` で、報告書が 1 つもないときにアップロードを失敗させます。`path` が設定の
   ディレクトリと合っていないときなどです。
 - 毎週の実行 (`schedule`) は SCA のためです。変えていないパッケージにも、新しいアドバイザリが公開されます。
+- SAST は本番と同じく設定を検査するので、ジョブにはリポジトリの secrets から本番の秘密の値 (`SECURITY_SALT` など) を
+  渡します。渡さないと、既定の salt でジョブが失敗します
+  ([security-sast の CI](https://pieceofcake2.github.io/security-sast/ja/ci#ci-での設定の検査))。
 - DAST はアプリケーションを `APP_ENV=test` で動かすので、ジョブには、テストと同じく、テーブルのあるテストの
   データベースが要ります ([security-dast の CI](https://pieceofcake2.github.io/security-dast/ja/ci))。
 - `if: ${{ !cancelled() }}` で、診断がジョブを失敗させたときにも報告書をアップロードします。報告書が必要なのは
