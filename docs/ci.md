@@ -23,6 +23,9 @@ and each pull request, and every week, with the test database that DAST needs, a
 - `if-no-files-found: error` fails the upload when no report was written, e.g. when the `path` does not match
   the directory of the settings.
 - The weekly run (`schedule`) matters for SCA: new advisories are published for packages that did not change.
+- SAST checks the configuration as in production, so the job gets the secrets of production from the secrets of
+  the repository (`SECURITY_SALT`, ...); without them, the default salt fails the job (see
+  [CI of security-sast](https://pieceofcake2.github.io/security-sast/ci#the-configuration-in-ci)).
 - DAST runs the application with `APP_ENV=test`: the job needs the test database with its tables, as for the
   tests (see [CI of security-dast](https://pieceofcake2.github.io/security-dast/ci)).
 - `if: ${{ !cancelled() }}` uploads the reports also when a check fails the job, which is when they are needed.

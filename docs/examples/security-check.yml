@@ -52,6 +52,12 @@ jobs:
       # The settings come from config/security.php: 'report' => ['dir' => 'tmp/security'] writes the reports to
       # tmp/security/, and without it they are tmp/security-sca.pdf, tmp/security-sast.pdf and tmp/security-dast.pdf
       - name: Run the security checks
+        env:
+          # The secrets of production, for the check of the configuration of SAST: without them, it checks the
+          # defaults of the application. They are compared as their SHA-256 and length, and not written to the report
+          SECURITY_SALT: ${{ secrets.SECURITY_SALT }}
+          SECURITY_CIPHER_SEED: ${{ secrets.SECURITY_CIPHER_SEED }}
+          COOKIE_KEY: ${{ secrets.COOKIE_KEY }}
         run: vendor/bin/security-check
 
       - name: Upload the reports
