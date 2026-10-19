@@ -108,7 +108,9 @@ For an existing application, go through the reports in this order:
    settings; read what a change of a secret breaks before changing it.
    [The Configuration](https://pieceofcake2.github.io/security-sast/rules#the-configuration)
 3. **DAST: the security headers and the cookies.** Most alerts of the baseline scan are fixed once for the whole
-   application, in `AppController` and the web server. [Alerts](https://pieceofcake2.github.io/security-dast/alerts)
+   application: the headers in the web server or with
+   [pieceofcake2/security-headers](https://pieceofcake2.github.io/security-headers/) (or by hand in
+   `AppController`), the cookies in `config/core.php`. [Alerts](https://pieceofcake2.github.io/security-dast/alerts)
 4. **SAST: the code**, from the High findings: SQL, views, `unserialize()`, then the Medium ones.
    [Fixing the Findings](https://pieceofcake2.github.io/security-sast/fixing)
 5. **DAST: the full scan** on the End-to-End tests, as a user: it checks by attacks that the fixes hold.
