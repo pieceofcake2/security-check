@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.0.2
 
 - The example workflow of the docs is in the Composer package, which `docs/ci.md` links to
 
