@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.3
+
+- The docs point the fix of the missing security headers to
+  [pieceofcake2/security-headers](https://pieceofcake2.github.io/security-headers/), which adds them to every
+  response of CakePHP; the way by hand in `AppController` stays
+
 ## 1.0.2
 
 - The example workflow of the docs is in the Composer package, which `docs/ci.md` links to
