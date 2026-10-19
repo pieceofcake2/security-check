@@ -105,8 +105,10 @@ return [
    [脆弱性を修正する](https://pieceofcake2.github.io/security-sca/ja/fixing)
 2. **SAST: 本番の設定。** デバッグレベル、salt、Cookie の鍵は、いくつかの設定です。秘密の値を変える前に、変えると何が
    使えなくなるかを読んでください。[設定](https://pieceofcake2.github.io/security-sast/ja/rules#設定)
-3. **DAST: セキュリティヘッダーと Cookie。** ベースラインスキャンのアラートのほとんどは、`AppController` と Web
-   サーバーで、アプリケーション全体に一度で修正できます。[アラート](https://pieceofcake2.github.io/security-dast/ja/alerts)
+3. **DAST: セキュリティヘッダーと Cookie。** ベースラインスキャンのアラートのほとんどは、アプリケーション全体に一度で
+   修正できます。ヘッダーは Web サーバーか
+   [pieceofcake2/security-headers](https://pieceofcake2.github.io/security-headers/ja/) (または `AppController` で手で)、
+   Cookie は `config/core.php` で修正します。[アラート](https://pieceofcake2.github.io/security-dast/ja/alerts)
 4. **SAST: コード。** 高の指摘 (SQL、ビュー、`unserialize()`) から、次に中の指摘を修正します。
    [指摘を修正する](https://pieceofcake2.github.io/security-sast/ja/fixing)
 5. **DAST: フルスキャン。** ユーザーとして、End-to-End テストでフルスキャンします。修正が保たれていることを攻撃で
